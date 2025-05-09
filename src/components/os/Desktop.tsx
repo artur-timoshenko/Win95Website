@@ -462,31 +462,30 @@ const Desktop: React.FC<DesktopProps> = () => {
 };
 
 const contextItemStyle: React.CSSProperties = {
-    padding: '2px 8px',  // уменьшенные отступы
-    cursor: 'default',
+    padding: '2px 8px',
     whiteSpace: 'nowrap',
     fontSize: '14px',
     userSelect: 'none',
-    color: 'black',  // базовый цвет текста
+    color: 'black',
     backgroundColor: 'transparent',
     border: '1px solid transparent',
     display: 'block',
-    width: 'auto',    // автоматическая ширина
+    width: 'auto',
     boxSizing: 'border-box',
-    transition: 'background-color 0.2s, color 0.2s', // плавный переход
-    margin: '0' // убрали дополнительные отступы
+    transition: 'background-color 0.2s, color 0.2s',
+    margin: '0'
 };
 
-// Add hover effect for changing text color to white
+
 const contextItemHoverStyle: React.CSSProperties = {
-    color: 'white',  // цвет текста на ховере
-    backgroundColor: '#0000a3'  // эффект на ховер
+    color: 'white',
+    backgroundColor: '#0000a3'
 };
 
 // Specific styles for "Paste" and "Delete" to change their text color to white
 const specialItemStyle: React.CSSProperties = {
-    color: '#808080',  // белый цвет текста для Paste и Delete
-    backgroundColor: 'transparent', // прозрачный фон
+    color: '#808080',
+    backgroundColor: 'transparent',
 };
 
 const menuDividerStyle: React.CSSProperties = {

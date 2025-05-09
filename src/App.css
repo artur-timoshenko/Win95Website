@@ -1,13 +1,7 @@
-/* Указываем курсор для всего сайта */
 html, body {
     height: 100%;
     margin: 0;
     overflow: hidden;
-    cursor: url('assets/icons/arrow.png'), auto; /* Стандартный курсор */
-}
-
-.hand-cursor {
-    cursor: url('assets/icons/hand.png'), pointer; /* Курсор для кликабельных элементов */
 }
 
 .App {
