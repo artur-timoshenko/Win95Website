@@ -11,6 +11,7 @@ export interface LogoAnimationProps {}
 
 const LogoAnimation: React.FC<LogoAnimationProps> = () => {
     const [isHovered, setIsHovered] = useState(false);
+    const [isPressed, setIsPressed] = useState(false);
 
     const navigate = useNavigate();
     const handleClick = () => {
@@ -367,6 +368,9 @@ const LogoAnimation: React.FC<LogoAnimationProps> = () => {
         ...baseButtonStyle,
         backgroundColor: isHovered ? '#0000ee' : '#C0C0C0',
         color: isHovered ? 'white' : 'black',
+        transform: isPressed ? 'scale(0.96)' : 'scale(1)',
+        boxShadow: isPressed ? 'inset 2px 2px #808080' : '2px 2px #808080',
+        borderStyle: isPressed ? 'inset' : 'outset',
     };
 
     return (
@@ -440,7 +444,12 @@ const LogoAnimation: React.FC<LogoAnimationProps> = () => {
                 <button
                     style={buttonStyle}
                     onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
+                    onMouseLeave={() => {
+                        setIsHovered(false);
+                        setIsPressed(false);
+                    }}
+                    onMouseDown={() => setIsPressed(true)}
+                    onMouseUp={() => setIsPressed(false)}
                     onClick={handleClick}
                 >
                     Contact
@@ -465,9 +474,12 @@ const baseButtonStyle: CSSProperties = {
     fontSize: '20px',
     cursor: 'pointer',
     marginTop: '20px',
-    fontFamily: "'MS Sans Serif', Geneva, sans-serif",
+    fontFamily: "'Terminal', Geneva, sans-serif",
     backgroundColor: '#C0C0C0',
-    transition: 'background-color 0.3s ease',
+    border: '2px outset white',
+    boxShadow: '2px 2px #808080',
+    transition: 'all 0.1s ease-in-out',
+    transform: 'scale(1)',
 };
 
 const styles = {
