@@ -26,7 +26,7 @@ const APPLICATIONS: {
 } = {
     showcase: {
         key: 'showcase',
-        name: 'My Showcase',
+        name: 'Showcase',
         shortcutIcon: 'showcaseIcon',
         component: ShowcaseExplorer,
     },

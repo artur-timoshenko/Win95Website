@@ -1,56 +1,138 @@
-import React from 'react';
+import React, { CSSProperties, useState } from 'react';
+import logoVideo from '../../../../assets/video/logo.mp4';
 
-import kakashiPose from '../../../../assets/icons/copy-ninja.png';
+export interface LogoAnimationProps {}
 
-export interface LogoAnimationProps {}  // Измените имя интерфейса
+const textStyle: CSSProperties = {
+    fontFamily: "'Terminal', Courier, monospace",
+};
 
-const LogoAnimation: React.FC<LogoAnimationProps> = (props) => {  // Используйте новый интерфейс
+const centerTextStyle: CSSProperties = {
+    fontFamily: "'Terminal', Courier, monospace",
+    textAlign: 'center',
+};
+
+const baseButtonStyle: CSSProperties = {
+    height: '60px',
+    width:'100%',
+    fontSize: '20px',
+    cursor: 'pointer',
+    marginTop: '20px',
+    fontFamily: "'MS Sans Serif', Geneva, sans-serif",
+    backgroundColor: '#C0C0C0',
+    transition: 'background-color 0.3s ease',
+};
+
+const styles = {
+    divider: {
+        width: '100%',
+        height: '2px',
+        backgroundColor: '#000',
+        margin: '10px 0',
+    } as CSSProperties,
+    videoContainer: {
+        display: 'flex',
+        flexDirection: 'column' as const,
+        alignItems: 'center',
+        marginTop: '20px',
+        marginBottom: '20px',
+    },
+    video: {
+        width: '640px',
+        height: '360px',
+        border: '2px solid #000',
+    } as CSSProperties,
+    retroPlayer: {
+        width: '640px',
+        height: '360px',
+        backgroundColor: '#C0C0C0',
+        border: '2px solid #808080',
+        boxShadow: 'inset -2px -2px #fff, inset 2px 2px #000',
+        padding: '4px',
+    } as React.CSSProperties,
+    retroVideo: {
+        width: '100%',
+        height: '100%',
+        border: '2px inset #808080',
+    } as React.CSSProperties,
+};
+
+const LogoAnimation: React.FC<LogoAnimationProps> = () => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    const buttonStyle = {
+        ...baseButtonStyle,
+        backgroundColor: isHovered ? '#0000ee' : '#C0C0C0',
+        color: isHovered ? 'white' : 'black',
+    };
+
     return (
-        <div className="site-page-content">
+        <div className="site-page-content terminal-font">
             <h1>Logo Animation</h1>
-            <h2>Bring To Life</h2>
+            <h2>Breathe Life into Your Brand</h2>
             <br />
-            <br />
-            <h2>Что такое анимация логотипа?</h2>
-            <p>
-                Анимация логотипа — это искусство превращать статичный логотип в динамичное визуальное произведение.
-                Через креативное движение мы вдохнем жизнь в символ вашего бренда, делая его более привлекательным
-                и запоминающимся. Будь то простое появление, взрыв цвета или сложная 3D-трансформация — возможности безграничны.
+            <div style={styles.divider}>ㅤ</div>
+
+            <h2>What is Logo Animation?</h2>
+            <p style={textStyle}>
+                Logo animation is a way to give your brand personality and make it memorable. Through dynamic and
+                expressive movements, your logo will attract more attention and create a lasting impression. Whether
+                it's a simple and elegant animation or striking visual transformations, the possibilities are endless.
             </p>
 
-            {/* Блок с видео */}
-            <div className="logo-animation-video">
-                <video controls>
-                    <source src="path-to-your-video.mp4" type="video/mp4" />
-                    Ваш браузер не поддерживает видео тег.
-                </video>
-                <p>Это примеры анимаций логотипов.</p>
+            {/* Video block */}
+            <div style={styles.videoContainer}>
+                <div style={styles.retroPlayer}>
+                    <video controls style={styles.retroVideo}>
+                        <source src={logoVideo} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p style={{ ...centerTextStyle, marginTop: '6px', fontSize: '20px', maxWidth: '640px' }}>
+                    Examples of logo animation.
+                </p>
             </div>
 
-            <h2>Процесс создания анимации</h2>
-            <p>Процесс создания анимации логотипа включает несколько ключевых этапов:</p>
+            <div style={styles.divider}>ㅤ</div>
+
+            <h2>Animation Creation Process</h2>
+            <p style={textStyle}>Creating high-quality logo animation involves several key stages:</p>
             <ol>
-                <li><strong>Анализ и планирование:</strong>
-                    <p>Понимание бренда: Перед началом важно понять концепцию бренда, его ценности, целевую аудиторию и
-                        стиль. Анимация должна отражать эти элементы.</p>
-                    <p>Тип анимации: Определите, какой тип анимации подходит для вашего логотипа (например, трансформация, разворачивание, интерактивные элементы).</p>
-                    <p>Технические требования: Уясните, в каких форматах и для каких платформ будет использоваться анимация.</p>
+                <li><strong>Analysis and Planning:</strong>
+                    <p style={textStyle}>Understand the brand, determine animation goals and audience.</p>
+                    <p style={textStyle}>Select the type and style of animation suitable for the logo.</p>
+                    <p style={textStyle}>Identify technical requirements for different platforms.</p>
                 </li>
-                <li><strong>Разработка идеи и концептуализация:</strong>
-                    <p>Мокапы и эскизы: Создайте несколько вариантов анимаций, чтобы оценить, какой вариант будет наиболее эффектным. Это могут быть простые скетчи или анимации на основе ключевых кадров.</p>
-                    <p>Storyboard: Если анимация сложная, стоит разработать раскадровку (storyboard), чтобы увидеть, как будет двигаться логотип.</p>
+                <li><strong>Concept and Idea Development:</strong>
+                    <p style={textStyle}>Create sketches and drafts of possible options.</p>
+                    <p style={textStyle}>Prepare a storyboard for complex projects.</p>
                 </li>
-                <li><strong>Экспорт и интеграция:</strong>
-                    <p>Экспорт в нужном формате: Сохраните анимацию в соответствующем формате, например, GIF/MP4/Lottie, в зависимости от того, где она будет использоваться.</p>
+                <li><strong>Export and Integration:</strong>
+                    <p style={textStyle}>Prepare the final file in formats such as GIF, MP4, Lottie, and others.</p>
                 </li>
-                <li><strong>Финальные проверки и корректировки:</strong>
-                    <p>Обсуждение с клиентом: Покажите клиенту финальный результат, получите обратную связь и внесите корректировки по необходимости.</p>
+                <li><strong>Final Review and Adjustments:</strong>
+                    <p style={textStyle}>Discuss the animation with the client and make necessary revisions.</p>
                 </li>
             </ol>
-            <h2>Давайте работать вместе</h2>
-            <p>
-                Готовы дать вашему логотипу анимацию, которую он заслуживает? Нажмите кнопку ниже, чтобы начать. Давайте создадим что-то незабываемое для вашего бренда!
+
+            <div style={styles.divider}>ㅤ</div>
+
+            <h2>Let's Work Together!</h2>
+            <p style={textStyle}>
+                Ready to animate your logo and make your brand stand out? Click the button below and start collaborating
+                with us. We will help you create an animation that will definitely be remembered!
             </p>
+            <div style={styles.divider}>ㅤ</div>
+            <div style={{ textAlign: 'center' }}>
+                <button
+                    style={buttonStyle}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    onClick={() => alert('Clicked!')}
+                >
+                    Order
+                </button>
+            </div>
         </div>
     );
 };

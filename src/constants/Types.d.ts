@@ -17,3 +17,8 @@ declare type DesktopWindows = {
         icon: IconName;
     };
 };
+declare namespace JSX {
+    interface IntrinsicElements {
+        'media-theme-reelplay': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+    }
+}
