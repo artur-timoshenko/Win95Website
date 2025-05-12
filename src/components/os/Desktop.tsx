@@ -126,7 +126,7 @@ const Desktop: React.FC<DesktopProps> = () => {
             if (contextMenu.visible) {
                 setContextMenu((prev) => ({
                     ...prev,
-                    transitioning: true, // Start the transition to hide the menu
+                    transitioning: true,
                 }));
 
                 setTimeout(() => {
@@ -134,9 +134,9 @@ const Desktop: React.FC<DesktopProps> = () => {
                         visible: false,
                         x: 0,
                         y: 0,
-                        transitioning: false, // End the transition
+                        transitioning: false,
                     });
-                }, 300); // Adjust the timing to match the transition duration
+                }, 300);
             }
         };
         window.addEventListener('click', handleClickOutside);
@@ -301,7 +301,7 @@ const Desktop: React.FC<DesktopProps> = () => {
             visible: true,
             x: e.clientX,
             y: e.clientY,
-            transitioning: false,  // Start the fade-in effect immediately
+            transitioning: false,
         });
     };
 
@@ -378,9 +378,9 @@ const Desktop: React.FC<DesktopProps> = () => {
                         width: 160,
                         display: 'flex',
                         flexDirection: 'column',
-                        opacity: contextMenu.transitioning ? 0 : 1,  // Opacity transition
-                        visibility: contextMenu.transitioning ? 'hidden' : 'visible', // Ensure visibility toggles
-                        transition: 'opacity 0.3s ease, visibility 0s 0.3s' // Transition applied here
+                        opacity: contextMenu.transitioning ? 0 : 1,
+                        visibility: contextMenu.transitioning ? 'hidden' : 'visible',
+                        transition: 'opacity 0.3s ease, visibility 0s 0.3s'
                     }}
                     onClick={() => setContextMenu({ ...contextMenu, visible: false })}
                 >
@@ -482,7 +482,7 @@ const contextItemHoverStyle: React.CSSProperties = {
     backgroundColor: '#0000a3'
 };
 
-// Specific styles for "Paste" and "Delete" to change their text color to white
+
 const specialItemStyle: React.CSSProperties = {
     color: '#808080',
     backgroundColor: 'transparent',
