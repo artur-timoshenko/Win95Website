@@ -4,13 +4,18 @@ import { useLayoutEffect } from 'react';
 import 'media-chrome';
 import 'media-chrome/menu';
 import 'media-chrome/media-theme-element';
+import { useNavigate } from 'react-router-dom';
 
 export interface LogoAnimationProps {}
 
 
-
 const LogoAnimation: React.FC<LogoAnimationProps> = () => {
     const [isHovered, setIsHovered] = useState(false);
+
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/contact');
+    };
 
     useLayoutEffect(() => {
         const id = 'media-theme-reelplay';
@@ -436,8 +441,9 @@ const LogoAnimation: React.FC<LogoAnimationProps> = () => {
                     style={buttonStyle}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
+                    onClick={handleClick}
                 >
-                    Order
+                    Contact
                 </button>
             </div>
         </div>
@@ -445,12 +451,12 @@ const LogoAnimation: React.FC<LogoAnimationProps> = () => {
 };
 
 const textStyle: CSSProperties = {
-    fontFamily: "'Terminal', Courier, monospace",
+    fontFamily: '\'Terminal\', Courier, monospace'
 };
 
 const centerTextStyle: CSSProperties = {
-    fontFamily: "'Terminal', Courier, monospace",
-    textAlign: 'center',
+    fontFamily: '\'Terminal\', Courier, monospace',
+    textAlign: 'center'
 };
 
 const baseButtonStyle: CSSProperties = {
