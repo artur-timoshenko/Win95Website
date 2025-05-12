@@ -405,7 +405,7 @@ const LogoAnimation: React.FC<LogoAnimationProps> = () => {
                     }}
                 />
                 <p style={{ ...centerTextStyle, marginTop: '6px', fontSize: '20px', maxWidth: '640px' }}>
-                    Examples of logo animation.
+                    <strong>Video 1:</strong> Examples of logo animation.
                 </p>
             </div>
 

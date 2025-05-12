@@ -9,12 +9,13 @@ import Doom from '../applications/Doom';
 import BG from '../../assets/pictures/BG.png';
 import Pacman from '../applications/Pacman';
 import Tetris from '../applications/Tetris';
-
+import { useNavigate } from 'react-router-dom';
 
 
 export interface DesktopProps {}
 
 type ExtendedWindowAppProps<T> = T & WindowAppProps;
+
 
 const APPLICATIONS: {
     [key: string]: {
@@ -387,10 +388,11 @@ const Desktop: React.FC<DesktopProps> = () => {
                     <div
                         style={{
                             ...contextItemStyle,
-                            ...(hoveredItem === 'arrangeIcons' ? contextItemHoverStyle : {})
+                            ...(hoveredItem === 'websites' ? contextItemHoverStyle : {})
                         }}
-                        onMouseEnter={() => setHoveredItem('arrangeIcons')}
+                        onMouseEnter={() => setHoveredItem('websites')}
                         onMouseLeave={() => setHoveredItem(null)}
+
                     >
                         Websites
                     </div>
@@ -402,7 +404,7 @@ const Desktop: React.FC<DesktopProps> = () => {
                         onMouseEnter={() => setHoveredItem('lineUpIcons')}
                         onMouseLeave={() => setHoveredItem(null)}
                     >
-                        Motion
+                    Motion
                     </div>
                     <div style={menuDividerStyle} />
                     <div
