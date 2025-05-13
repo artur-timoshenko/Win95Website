@@ -1,17 +1,22 @@
 import React, { CSSProperties, useState, useEffect } from 'react';
 import HTMLicon from '../../../assets/icons/HTMLicon.png'
 import { Link } from 'react-router-dom';
-
+import AEicon from '../../../assets/icons/AEicon.png'
+import AIicon from '../../../assets/icons/AIicon.png'
+import PSicon from '../../../assets/icons/PSicon.png'
+import PRicon from '../../../assets/icons/PRicon.png'
+import BlenderIcon from '../../../assets/icons/BlenderIcon.png'
+import AsepriteIcon from '../../../assets/icons/AsepriteIcon.png'
 export interface MotionProps {}
 
 const Motion: React.FC<MotionProps> = () => {
     const skillLevels = [
-        { name: 'HTML', level: 8, icon: HTMLicon },
-        { name: 'CSS', level: 6, icon: HTMLicon },
-        { name: 'React', level: 8, icon: HTMLicon },
-        { name: 'JS', level: 6, icon: HTMLicon },
-        { name: 'Django', level: 8, icon: HTMLicon },
-        { name: 'JS', level: 6, icon: HTMLicon },
+        { name: 'After Effects', level: 8, icon: AEicon },
+        { name: 'Premiere Pro', level: 9, icon: PRicon },
+        { name: 'Photoshop', level: 7, icon: PSicon },
+        { name: 'Illustrator', level: 6, icon: AIicon },
+        { name: 'Blender', level: 5, icon: BlenderIcon },
+        { name: 'Aseprite', level: 3, icon: AsepriteIcon },
     ];
 
 

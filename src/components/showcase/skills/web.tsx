@@ -1,17 +1,22 @@
 import React, { CSSProperties, useState, useEffect } from 'react';
 import HTMLicon from '../../../assets/icons/HTMLicon.png'
 import { Link } from 'react-router-dom';
+import CSSicon from '../../../assets/icons/CSSicon.png'
+import JSicon from '../../../assets/icons/JSicon.png'
+import ReactIcon from '../../../assets/icons/ReactIcon.png'
+import DJicon from '../../../assets/icons/DJicon.png'
+import FAicon from '../../../assets/icons/FAicon.png'
 
 export interface WebProps {}
 
 const Web: React.FC<WebProps> = () => {
     const skillLevels = [
         { name: 'HTML', level: 8, icon: HTMLicon },
-        { name: 'CSS', level: 6, icon: HTMLicon },
-        { name: 'React', level: 8, icon: HTMLicon },
-        { name: 'JS', level: 6, icon: HTMLicon },
-        { name: 'Django', level: 8, icon: HTMLicon },
-        { name: 'JS', level: 6, icon: HTMLicon },
+        { name: 'CSS', level: 6, icon: CSSicon },
+        { name: 'JavaScript', level: 8, icon: JSicon },
+        { name: 'Django', level: 6, icon: DJicon },
+        { name: 'React', level: 8, icon: ReactIcon },
+        { name: 'Fastapi', level: 6, icon: FAicon },
     ];
 
 

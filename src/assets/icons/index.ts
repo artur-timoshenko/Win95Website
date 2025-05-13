@@ -20,7 +20,17 @@ import tetrisIcon from './pacmanIcon.png'
 import moonIcon from './moonIcon.png'
 import sunIcon from './moonIcon.png'
 import HTMLicon from'./HTMLicon.png'
-
+import AEIcon from './AEicon.png'
+import AIicon from './AIicon.png'
+import PSicon from './PSicon.png'
+import PRicon from './PRicon.png'
+import AsepriteIcon from './AsepriteIcon.png'
+import BlenderIcon from './BlenderIcon.png'
+import CSSicon from './CSSicon.png'
+import JSicon from './JSicon.png'
+import ReactIcon from './ReactIcon.png'
+import DJicon from './DJicon.png'
+import FAicon from './FAicon.png'
 
 const icons = {
     windowResize: windowResize,
@@ -43,6 +53,18 @@ const icons = {
     moonIcon:moonIcon,
     sunIcon:sunIcon,
     HTMLicon:HTMLicon,
+    AEIcon:AEIcon,
+    AIicon:AIicon,
+    PSicon:PSicon,
+    PRicon:PRicon,
+    AsepriteIcon:AsepriteIcon,
+    BlenderIcon:BlenderIcon,
+    CSSicon:CSSicon,
+    JSicon:JSicon,
+    ReactIcon:ReactIcon,
+    DJicon:DJicon,
+    FAicon:FAicon,
+
 };
 
 export type IconName = keyof typeof icons;
