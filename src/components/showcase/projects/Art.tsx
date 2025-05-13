@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import software from '../../../assets/pictures/projects/software.gif';
+import CharacterAnimation from '../../../assets/pictures/CharacterAnimation.gif';
 import art from '../../../assets/pictures/projects/art.gif';
 import copyNinjaImage from '../../../assets/icons/copy-ninja.png';
 import { ExplainersProps } from './motion design project/Explainers';
@@ -102,7 +103,7 @@ const Projects: React.FC<ProjectsProps> = () => {
                     route="Explainers"
                 />
                 <ProjectBox
-                    icon={art}
+                    icon={CharacterAnimation}
                     iconStyle={styles.artIcon}
                     title="Character Animation"
                     subtitle="Landing Page"
@@ -158,8 +159,8 @@ const styles: StyleSheetCSS = {
         height: 48,
     },
     artIcon: {
-        width: 21 * 2,
-        height: 37 * 2,
+        width: 100,
+        height: 100,
     },
     ninjaIcon:{
         width: 75,

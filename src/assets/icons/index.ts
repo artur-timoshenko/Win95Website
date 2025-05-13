@@ -31,6 +31,7 @@ import JSicon from './JSicon.png'
 import ReactIcon from './ReactIcon.png'
 import DJicon from './DJicon.png'
 import FAicon from './FAicon.png'
+import TGicon from './TGicon.png'
 
 const icons = {
     windowResize: windowResize,
@@ -64,6 +65,7 @@ const icons = {
     ReactIcon:ReactIcon,
     DJicon:DJicon,
     FAicon:FAicon,
+    TGicon:TGicon,
 
 };
 
