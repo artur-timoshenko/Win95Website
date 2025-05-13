@@ -17,7 +17,9 @@ import close from './close.png';
 import doomIcon from './doomIcon.png'
 import pacmanIcon from './pacmanIcon.png'
 import tetrisIcon from './pacmanIcon.png'
-
+import moonIcon from './moonIcon.png'
+import sunIcon from './moonIcon.png'
+import HTMLicon from'./HTMLicon.png'
 
 
 const icons = {
@@ -38,6 +40,9 @@ const icons = {
     doomIcon:doomIcon,
     pacmanIcon:pacmanIcon,
     tetrisIcon: tetrisIcon,
+    moonIcon:moonIcon,
+    sunIcon:sunIcon,
+    HTMLicon:HTMLicon,
 };
 
 export type IconName = keyof typeof icons;

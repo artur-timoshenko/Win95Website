@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../showcase/Home';
 import About from '../showcase/About';
 import Window from '../os/Window';
-import Experience from '../showcase/Experience';
+import Skills from '../showcase/Skills';
 import Projects from '../showcase/Projects';
 import Contact from '../showcase/Contact';
 import TheCopyNinja from '../showcase/projects/website project/the-copy-ninja';
@@ -20,6 +20,8 @@ import SoftwareProjects from '../showcase/projects/Software';
 import ArtProjects from '../showcase/projects/Art';
 import VerticalNavbar from '../showcase/VerticalNavbar';
 import useInitialWindowSize from '../../hooks/useInitialWindowSize';
+import Web from '../showcase/skills/web';
+import Motion from '../showcase/skills/motion';
 
 export interface ShowcaseExplorerProps extends WindowAppProps {}
 
@@ -45,7 +47,7 @@ const ShowcaseExplorer: React.FC<ShowcaseExplorerProps> = (props) => {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
-                        <Route path="/experience" element={<Experience />} />
+                        <Route path="/skills" element={<Skills />} />
                         <Route path="/projects" element={<Projects />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/contact" element={<Contact />} />
@@ -59,6 +61,8 @@ const ShowcaseExplorer: React.FC<ShowcaseExplorerProps> = (props) => {
                         <Route path="/projects/WebsiteAnimation" element={<WebsiteAnimation />} />
                         <Route path="/projects/Animation25D" element={<Animation25D />} />
                         <Route path="/projects/ShowReel" element={<ShowReel />} />
+                        <Route path="/skills/web" element={<Web />} />
+                        <Route path="/skills/motion" element={<Motion />} />
                         <Route
                             path="/projects/software"
                             element={<SoftwareProjects />}

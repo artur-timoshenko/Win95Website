@@ -34,12 +34,12 @@ const Home: React.FC<HomeProps> = () => {
                     }
                 />
                 <Link
-                    to="experience"
+                    to="skills"
                     containerStyle={styles.link}
                     text={
                         <div style={styles.iconBlock}>
                             <img src={experienceIcon} alt="Experience" style={styles.icon} />
-                            <div style={styles.label}>Experience</div>
+                            <div style={styles.label}>Skills</div>
                         </div>
                     }
                 />

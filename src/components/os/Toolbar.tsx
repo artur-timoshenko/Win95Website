@@ -1,17 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import Colors from '../../constants/colors';
 import { Icon } from '../general';
-
+import { ThemeContext } from '../../hooks/ThemeProvider';
 export interface ToolbarProps {
     windows: DesktopWindows;
     toggleMinimize: (key: string) => void;
     shutdown: () => void;
+    toggleTheme: () => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
                                              windows,
                                              toggleMinimize,
                                              shutdown,
+                                             toggleTheme,
                                          }) => {
     const getTime = () => {
         const date = new Date();
@@ -24,6 +26,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
         const strTime = hours + ':' + mins + ' ' + amPm;
         return strTime;
     };
+    const { theme, themeToggler } = useContext(ThemeContext);
 
     const [startWindowOpen, setStartWindowOpen] = useState(false);
     const lastClickInside = useRef(false);
@@ -124,6 +127,43 @@ const Toolbar: React.FC<ToolbarProps> = ({
                         </div>
                         <div style={styles.startWindowContent}>
                             <div style={styles.startMenuSpace} />
+                            <div style={styles.startMenuLine} />
+                            {theme === 'light' && (
+                                <div
+                                    className="start-menu-option"
+                                    style={styles.startMenuOption}
+                                    onMouseDown={() => {
+                                        themeToggler();
+                                        toggleTheme();
+                                    }}
+                                >
+                                    <Icon
+                                        style={styles.startMenuIcon}
+                                        icon="moonIcon"
+                                    />
+                                    <p style={styles.startMenuText}>
+                                        Dark <u>m</u>ode
+                                    </p>
+                                </div>
+                            )}
+                            {theme === 'dark' && (
+                                <div
+                                    className="start-menu-option"
+                                    style={styles.startMenuOption}
+                                    onMouseDown={() => {
+                                        themeToggler();
+                                        toggleTheme();
+                                    }}
+                                >
+                                    <Icon
+                                        style={styles.startMenuIcon}
+                                        icon="sunIcon"
+                                    />
+                                    <p style={styles.startMenuText}>
+                                        Light <u>m</u>ode
+                                    </p>
+                                </div>
+                            )}
                             <div style={styles.startMenuLine} />
                             <div
                                 className="start-menu-option"

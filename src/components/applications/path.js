@@ -2,6 +2,7 @@ export const paths = {
     home: '/',
     about: '/about',
     experience: '/experience',
+    skills: '/skills',
     projects: '/projects',
     contact: '/contact',
     copyNinja: '/projects/the-copy-ninja',

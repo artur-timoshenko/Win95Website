@@ -10,9 +10,12 @@ import BG from '../../assets/pictures/BG.png';
 import Pacman from '../applications/Pacman';
 import Tetris from '../applications/Tetris';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { ThemeContext } from '../../hooks/ThemeProvider';
 
-
-export interface DesktopProps {}
+export interface DesktopProps {
+    toggleTheme: () => void;
+}
 
 type ExtendedWindowAppProps<T> = T & WindowAppProps;
 
@@ -58,6 +61,7 @@ const Desktop: React.FC<DesktopProps> = () => {
     const [windows, setWindows] = useState<DesktopWindows>({});
     const [shortcuts, setShortcuts] = useState<DesktopShortcutProps[]>([]);
     const [shutdown, setShutdown] = useState(false);
+    const { themeToggler } = useContext(ThemeContext);
     const [numShutdowns, setNumShutdowns] = useState(1);
     const [contextMenu, setContextMenu] = useState({
         visible: false,
@@ -77,6 +81,8 @@ const Desktop: React.FC<DesktopProps> = () => {
         originX: 0,
         originY: 0,
     });
+
+
 
 
     const [dragging, setDragging] = useState<{ x: number; y: number; id: string | null }>({
@@ -456,6 +462,7 @@ const Desktop: React.FC<DesktopProps> = () => {
                 windows={windows}
                 toggleMinimize={toggleMinimize}
                 shutdown={startShutdown}
+                toggleTheme={themeToggler}
             />
         </div>
     ) : (
