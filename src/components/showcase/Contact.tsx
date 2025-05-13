@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import colors from '../../constants/colors';
-import twitterIcon from '../../assets/pictures/contact-twitter.png';
+import TGicon from '../../assets/icons/TGicon.png';
 import ghIcon from '../../assets/pictures/contact-gh.png';
 import inIcon from '../../assets/pictures/contact-in.png';
 import ResumeDownload from './ResumeDownload';
@@ -119,21 +119,16 @@ const Contact: React.FC<ContactProps> = (props) => {
                         link={'https://github.com/artur-timoshenko?tab=repositories'}
                     />
                     <SocialBox
-                        icon={inIcon}
-                        link={'https://www.linkedin.com/in/henryheffernan/'}
-                    />
-                    <SocialBox
-                        icon={twitterIcon}
-                        link={'https://twitter.com/henryheffernan'}
+                        icon={TGicon}
+                        link={'https://t.me/ArTym0'}
                     />
                 </div>
             </div>
             <div className="text-block">
                 <p>
-                    I am currently employed, however if you have any
-                    opportunities, feel free to reach out - I would love to
-                    chat! You can reach me via my personal email, or fill out
-                    the form below!
+                    If you have any opportunities, don't hesitate to reach out - I'd love to chat!
+                    You can contact me via my personal email or fill out the form below!
+                    And also via telegram!
                 </p>
                 <br />
                 <p>
