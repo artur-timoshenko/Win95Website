@@ -1,7 +1,5 @@
 import React from 'react';
 
-import kakashiPose from '../../../../assets/icons/copy-ninja.png';
-
 export interface Animation25DProps {}  // Измените имя интерфейса
 
 const Animation25D: React.FC<Animation25DProps> = (props) => {  // Используйте новый интерфейс

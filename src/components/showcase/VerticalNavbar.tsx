@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from '../general';
-import forHire from '../../assets/pictures/forHireGif.gif';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export interface VerticalNavbarProps {}
+export interface VerticalNavbarProps {
+}
 
 const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
     const location = useLocation();
     const [projectsExpanded, setProjectsExpanded] = useState(false);
+    const [skillsExpanded, setSkillsExpanded] = useState(false);
     const [isHome, setIsHome] = useState(false);
 
     const navigate = useNavigate();
@@ -21,12 +22,20 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
         } else {
             setProjectsExpanded(false);
         }
+
+        if (location.pathname.includes('/skills')) {
+            setSkillsExpanded(true);
+        } else {
+            setSkillsExpanded(false);
+        }
+
         if (location.pathname === '/') {
             setIsHome(true);
         } else {
             setIsHome(false);
         }
-        return () => {};
+        return () => {
+        };
     }, [location.pathname]);
 
     return !isHome ? (
@@ -37,12 +46,6 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
             </div>
             <div style={styles.links}>
                 <Link containerStyle={styles.link} to="" text="HOME" />
-                <Link containerStyle={styles.link} to="about" text="ABOUT" />
-                <Link
-                    containerStyle={styles.link}
-                    to="skills"
-                    text="SKILLS"
-                />
                 <Link
                     containerStyle={Object.assign(
                         {},
@@ -58,17 +61,44 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = (props) => {
                         <div style={styles.insetLinks}>
                             <Link
                                 containerStyle={styles.insetLink}
-                                to="projects/software"
+                                to="projects/websites"
                                 text="WEBSITES"
                             />
                             <Link
                                 containerStyle={styles.insetLink}
-                                to="projects/art"
-                                text="MOTION DESIGN"
+                                to="projects/motion"
+                                text="MOTION"
                             />
                         </div>
                     )
                 }
+                <Link
+                    containerStyle={Object.assign(
+                        {},
+                        styles.link,
+                        skillsExpanded && styles.expandedLink
+                    )}
+                    to="skills"
+                    text="SKILLS"
+                />
+                {
+                    // if current path contains skills
+                    skillsExpanded && (
+                        <div style={styles.insetLinks}>
+                            <Link
+                                containerStyle={styles.insetLink}
+                                to="skills/web"
+                                text="WEB"
+                            />
+                            <Link
+                                containerStyle={styles.insetLink}
+                                to="skills/motion"
+                                text="MOTION"
+                            />
+                        </div>
+                    )
+                }
+                <Link containerStyle={styles.link} to="about" text="ABOUT" />
                 <Link
                     containerStyle={styles.link}
                     to="contact"
@@ -93,53 +123,54 @@ const styles: StyleSheetCSS = {
         padding: 48,
         boxSizing: 'border-box',
         position: 'fixed',
-        overflow: 'hidden',
+        overflow: 'hidden'
     },
     header: {
         flexDirection: 'column',
-        marginBottom: 64,
+        marginBottom: 64
     },
     headerText: {
         fontSize: 38,
-        lineHeight: 1,
+        lineHeight: 1
     },
     headerShowcase: {
-        marginTop: 12,
+        marginTop: 12
     },
     logo: {
         width: '100%',
-        marginBottom: 8,
+        marginBottom: 8
     },
     link: {
-        marginBottom: 32,
+        marginBottom: 32
     },
     expandedLink: {
-        marginBottom: 16,
+        marginBottom: 16
     },
     insetLinks: {
+        whiteSpace: 'nowrap',
         flexDirection: 'column',
         marginLeft: 32,
-        marginBottom: 16,
+        marginBottom: 16
     },
     insetLink: {
-        marginBottom: 8,
+        marginBottom: 8
     },
     links: {
         flexDirection: 'column',
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     image: {
-        width: '80%',
+        width: '80%'
     },
     spacer: {
-        flex: 1,
+        flex: 1
     },
     forHireContainer: {
         cursor: 'pointer',
 
-        width: '100%',
-    },
+        width: '100%'
+    }
 };
 
 export default VerticalNavbar;

@@ -25,6 +25,7 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
     const [isSelected, setIsSelected] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const [shortcutId, setShortcutId] = useState('');
+    const [lastSelected, setLastSelected] = useState(false);
     const [doubleClickTimerActive, setDoubleClickTimerActive] = useState(false);
 
     const requiredIcon = require(`../../assets/icons/${icon}.png`);
@@ -41,7 +42,11 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
         if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
             setIsSelected(false);
         }
-    }, []);
+
+        if (!isSelected && lastSelected) {
+            setLastSelected(false);
+        }
+    }, [isSelected, lastSelected]);
 
     const handleClickShortcut = useCallback(() => {
         if (doubleClickTimerActive) {
@@ -51,6 +56,7 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
             return;
         }
         setIsSelected(true);
+        setLastSelected(true);
         setDoubleClickTimerActive(true);
         setTimeout(() => {
             setDoubleClickTimerActive(false);
@@ -85,6 +91,7 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
                         ...(isActive && styles.checkerboard),
                         ...(isActive && {
                             WebkitMask: `url(${requiredIcon})`,
+                            WebkitMaskSize: "100%",
                         }),
                     }}
                 />
@@ -92,7 +99,7 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
             </div>
             <div
                 className={
-                    isActive ? 'selected-shortcut-border' : 'shortcut-border'
+                    isActive ? 'selected-shortcut-border' : lastSelected ? 'shortcut-border' : ''
                 }
                 style={isActive ? { backgroundColor: colors.blue } : {}}
             >
@@ -112,7 +119,8 @@ const DesktopShortcut: React.FC<DesktopShortcutProps> = ({
 const styles: Record<string, React.CSSProperties> = {
     appShortcut: {
         position: 'absolute',
-        width: 112, // Увеличено в 2 раза
+        width: 64, // Увеличено в 2 раза
+        marginLeft: 32,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
@@ -124,10 +132,11 @@ const styles: Record<string, React.CSSProperties> = {
         fontFamily: 'MSSerif',
         color: 'white',
         fontSize: 16, // Увеличен в 2 раза
-        padding: '0 4px',
+        padding: '0 8px',
         userSelect: 'none', // Отключение выделения текста
         outline: 'none',     // Убираем рамку при фокусе
         margin: 0,
+        whiteSpace: 'nowrap',
     },
     iconContainer: {
         cursor: 'pointer',

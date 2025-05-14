@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import Colors from '../../constants/colors';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ShowcaseExplorer from '../applications/ShowcaseExplorer';
 import ShutdownSequence from './ShutdownSequence';
 import Toolbar from './Toolbar';
@@ -8,10 +7,10 @@ import { IconName } from '../../assets/icons';
 import Doom from '../applications/Doom';
 import BG from '../../assets/pictures/BG.png';
 import Pacman from '../applications/Pacman';
-import Tetris from '../applications/Tetris';
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { ThemeContext } from '../../hooks/ThemeProvider';
+import ThisComputer from '../applications/ThisComputer';
+import { Link } from 'react-router-dom';
 
 export interface DesktopProps {
     toggleTheme: () => void;
@@ -31,8 +30,14 @@ const APPLICATIONS: {
     showcase: {
         key: 'showcase',
         name: 'Showcase',
-        shortcutIcon: 'showcaseIcon',
+        shortcutIcon: 'windowExplorerIcon',
         component: ShowcaseExplorer,
+    },
+    computer: {
+        key: 'computer',
+        name: 'Internet Explorer',
+        shortcutIcon: 'showcaseIcon',
+        component: ThisComputer,
     },
     doom: {
         key: 'doom',
@@ -40,19 +45,12 @@ const APPLICATIONS: {
         shortcutIcon: 'doomIcon',
         component: Doom,
     },
-
     pacman: {
         key: 'pacman',
-        name: 'pacman',
+        name: 'Pacman',
         shortcutIcon: 'pacmanIcon',
         component: Pacman,
-    },
-    tetris: {
-        key: 'tetris',
-        name: 'tetris',
-        shortcutIcon: 'doomIcon',
-        component: Tetris,
-    },
+    }
 };
 
 
@@ -69,6 +67,7 @@ const Desktop: React.FC<DesktopProps> = () => {
         y: 0,
         transitioning: false,
     });
+    const ticking = useRef(false);
 
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
@@ -82,51 +81,7 @@ const Desktop: React.FC<DesktopProps> = () => {
         originY: 0,
     });
 
-
-
-
-    const [dragging, setDragging] = useState<{ x: number; y: number; id: string | null }>({
-        x: 0,
-        y: 0,
-        id: null,
-    });
-
-    useEffect(() => {
-        if (shutdown === true) rebootDesktop();
-    }, [shutdown]);
-
-    useEffect(() => {
-        const newShortcuts: DesktopShortcutProps[] = [];
-        Object.keys(APPLICATIONS).forEach((key, index) => {
-            const app = APPLICATIONS[key];
-            newShortcuts.push({
-                shortcutName: app.name,
-                icon: app.shortcutIcon,
-                onOpen: () => {
-                    addWindow(
-                        app.key,
-                        <app.component
-                            onInteract={() => onWindowInteract(app.key)}
-                            onMinimize={() => minimizeWindow(app.key)}
-                            onClose={() => removeWindow(app.key)}
-                            key={app.key}
-                        />
-                    );
-                },
-                x: 6,
-                y: 16 + index * 104,
-                width: 64,
-                height: 80,
-                selected: false,
-            });
-        });
-        newShortcuts.forEach((shortcut) => {
-            if (shortcut.shortcutName === 'My Showcase') {
-                shortcut.onOpen();
-            }
-        });
-        setShortcuts(newShortcuts);
-    }, []);
+    const [dragging, setDragging] = useState(false);
 
     useEffect(() => {
         const handleClickOutside = () => {
@@ -155,6 +110,11 @@ const Desktop: React.FC<DesktopProps> = () => {
     const rebootDesktop = useCallback(() => {
         setWindows({});
     }, []);
+
+    useEffect(() => {
+        if (shutdown === true) rebootDesktop();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [shutdown]);
 
     const removeWindow = useCallback((key: string) => {
         setTimeout(() => {
@@ -222,11 +182,47 @@ const Desktop: React.FC<DesktopProps> = () => {
         }));
     }, [getHighestZIndex]);
 
-    const handleMouseDown = (e: React.MouseEvent) => {
+    useEffect(() => {
+        const newShortcuts: DesktopShortcutProps[] = [];
+        Object.keys(APPLICATIONS).forEach((key, index) => {
+            const app = APPLICATIONS[key];
+            newShortcuts.push({
+                shortcutName: app.name,
+                icon: app.shortcutIcon,
+                onOpen: () => {
+                    addWindow(
+                        app.key,
+                        <app.component
+                            onInteract={() => onWindowInteract(app.key)}
+                            onMinimize={() => minimizeWindow(app.key)}
+                            onClose={() => removeWindow(app.key)}
+                            key={app.key}
+                        />
+                    );
+                },
+                x: 6,
+                y: 16 + index * 104,
+                width: 64,
+                height: 80,
+                selected: false,
+            });
+        });
+        newShortcuts.forEach((shortcut) => {
+            if (shortcut.shortcutName === 'Showcase') {
+                shortcut.onOpen();
+            }
+        });
+
+        setShortcuts(newShortcuts);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleMouseDown = (e: any) => {
         const originX = e.clientX;
         const originY = e.clientY;
+
         setSelection({
-            isSelecting: true,
+            isSelecting: e.target.className === 'desktop' /*&& e.button === 0*/,
             originX,
             originY,
             startX: originX,
@@ -246,29 +242,72 @@ const Desktop: React.FC<DesktopProps> = () => {
     const handleMouseMove = (e: React.MouseEvent) => {
         if (!selection.isSelecting) return;
 
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-        const startX = Math.min(selection.originX, mouseX);
-        const startY = Math.min(selection.originY, mouseY);
-        const width = Math.abs(mouseX - selection.originX);
-        const height = Math.abs(mouseY - selection.originY);
+        if (!ticking.current) {
+            window.requestAnimationFrame(() => {
+                ticking.current = false;
+                ticking.current = true;
 
-        setSelection((prev) => ({
-            ...prev,
-            startX,
-            startY,
-            width,
-            height,
-        }));
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                const startX = Math.min(selection.originX, mouseX);
+                const startY = Math.min(selection.originY, mouseY);
+                const width = Math.abs(mouseX - selection.originX);
+                const height = Math.abs(mouseY - selection.originY);
+
+                setSelection((prev) => ({
+                    ...prev,
+                    startX,
+                    startY,
+                    width,
+                    height,
+                }));
+
+                const box = {
+                    x: selection.startX,
+                    y: selection.startY,
+                    width: selection.width,
+                    height: selection.height,
+                };
+
+                setShortcuts((prevShortcuts) =>
+                    prevShortcuts.map((shortcut) => {
+                        const iconBox = {
+                            x: shortcut.x ?? 0,
+                            y: shortcut.y ?? 0,
+                            width: shortcut.width ?? 64,
+                            height: shortcut.height ?? 80,
+                        };
+                        return {
+                            ...shortcut,
+                            selected: isIntersecting(box, iconBox),
+                        };
+                    })
+                );
+                ticking.current = false;
+            });
+            ticking.current = true;
+        }
     };
 
-    const isIntersecting = (a: any, b: any) => {
+    const isIntersecting = (a: any, b: any, marginLeft: any = 32) => {
         return !(
-            a.x > b.x + b.width ||
-            a.x + a.width < b.x ||
+            a.x > b.x + b.width + marginLeft ||
+            a.x + a.width + a < b.x ||
             a.y > b.y + b.height ||
             a.y + a.height < b.y
         );
+    };
+
+    const handleMouseLeave = () => {
+        setSelection({
+            isSelecting: false,
+            startX: 0,
+            startY: 0,
+            width: 0,
+            height: 0,
+            originX: 0,
+            originY: 0,
+        });
     };
 
     const handleMouseUp = () => {
@@ -302,9 +341,10 @@ const Desktop: React.FC<DesktopProps> = () => {
         }));
     };
 
-    const handleContextMenu = (e: React.MouseEvent) => {
+    const handleContextMenu = (e: any) => {
         e.preventDefault();
-        setContextMenu({
+
+        if (e?.target?.className === 'desktop') setContextMenu({
             visible: true,
             x: e.clientX,
             y: e.clientY,
@@ -314,10 +354,12 @@ const Desktop: React.FC<DesktopProps> = () => {
 
     return !shutdown ? (
         <div
+            className='desktop'
             style={styles.desktop}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
             onContextMenu={handleContextMenu}
         >
             {Object.keys(windows).map((key) => {
@@ -392,13 +434,14 @@ const Desktop: React.FC<DesktopProps> = () => {
                     onClick={() => setContextMenu({ ...contextMenu, visible: false })}
                 >
                     <div
+                        className='contextMenuItem'
                         style={{
                             ...contextItemStyle,
                             ...(hoveredItem === 'websites' ? contextItemHoverStyle : {})
                         }}
                         onMouseEnter={() => setHoveredItem('websites')}
                         onMouseLeave={() => setHoveredItem(null)}
-
+                        onClick={() => {removeWindow('showcase'); setTimeout(() => {window.history.pushState(null, "", '/projects/websites'); shortcuts[0].onOpen();}, 100)}}
                     >
                         Websites
                     </div>
@@ -409,8 +452,9 @@ const Desktop: React.FC<DesktopProps> = () => {
                         }}
                         onMouseEnter={() => setHoveredItem('lineUpIcons')}
                         onMouseLeave={() => setHoveredItem(null)}
+                        onClick={() => {removeWindow('showcase'); setTimeout(() => {window.history.pushState(null, "", '/projects/motion'); shortcuts[0].onOpen();}, 100)}}
                     >
-                    Motion
+                        Motion
                     </div>
                     <div style={menuDividerStyle} />
                     <div
@@ -443,6 +487,7 @@ const Desktop: React.FC<DesktopProps> = () => {
                         }}
                         onMouseEnter={() => setHoveredItem('new')}
                         onMouseLeave={() => setHoveredItem(null)}
+                        onClick={() => {removeWindow('showcase'); setTimeout(() => {window.history.pushState(null, "", '/contact'); shortcuts[0].onOpen();}, 100)}}
                     >
                         New Project
                     </div>
@@ -511,7 +556,7 @@ const styles: StyleSheetCSS = {
         backgroundImage: `url(${BG})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        position: 'relative'
+        position: 'relative',
     },
     shutdown: {
         minHeight: '100%',
@@ -530,7 +575,6 @@ const styles: StyleSheetCSS = {
         pointerEvents: 'none',
         opacity: 0,
     },
-
 };
 
 export default Desktop;

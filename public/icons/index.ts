@@ -1,19 +1,34 @@
 import React from 'react';
 
+// @ts-ignore
+import computerBig from './computerBig.png';
+// @ts-ignore
 import windowResize from './windowResize.png';
+// @ts-ignore
 import maximize from './maximize.png';
+// @ts-ignore
 import minimize from './minimize.png';
+// @ts-ignore
 import shutdown from './shutdown.png';
+// @ts-ignore
 import computerSmall from './computerSmall.png';
+// @ts-ignore
 import myComputer from './myComputer.png';
+// @ts-ignore
 import showcaseIcon from './showcase.png';
+// @ts-ignore
 import credits from './credits.png';
+// @ts-ignore
 import volumeOn from './volumeOn.png';
+// @ts-ignore
 import volumeOff from './volumeOff.png';
+// @ts-ignore
 import windowGameIcon from './windowGameIcon.png';
+// @ts-ignore
 import windowExplorerIcon from './windowExplorerIcon.png';
+// @ts-ignore
 import windowsStartIcon from './windowsStartIcon.png';
-import scrabbleIcon from './scrabbleIcon.png';
+// @ts-ignore
 import close from './close.png';
 
 const icons = {
@@ -23,6 +38,7 @@ const icons = {
     shutdown: shutdown,
     computerSmall: computerSmall,
     myComputer: myComputer,
+    computerBig: computerBig,
     showcaseIcon: showcaseIcon,
     volumeOn: volumeOn,
     volumeOff: volumeOff,
