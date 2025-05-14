@@ -53,8 +53,8 @@ const APPLICATIONS: {
         component: Pacman,
     },
     properties:{
-        key: 'properties',
-        name: 'properties',
+        key: 'Properties',
+        name: 'Properties',
         shortcutIcon: 'SettingsIcon',
         component: PropertiesExplorer,
     }
