@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import software from '../../../assets/pictures/projects/software.gif';
 import CharacterAnimation from '../../../assets/pictures/CharacterAnimation.gif';
+import LogoAnimation from '../../../assets/pictures/Logo.gif';
+import Reels from '../../../assets/pictures/reels.gif';
+import ShowReel from '../../../assets/pictures/showreel.gif';
+import Animation25D from '../../../assets/pictures/25D.gif';
+import Explainer from '../../../assets/pictures/explainer.gif';
+import WebsiteAnim from '../../../assets/pictures/Website.gif';
 import copyNinjaImage from '../../../assets/icons/copy-ninja.png';
 
 export interface ProjectsProps {}
@@ -66,35 +72,35 @@ const Projects: React.FC<ProjectsProps> = () => {
             <br />
             <div style={styles.projectLinksContainer}>
                 <ProjectBox
-                    icon={copyNinjaImage}
-                    iconStyle={styles.ninjaIcon}
+                    icon={ShowReel}
+                    iconStyle={styles.ShowIcon}
                     title="ShowReel"
                     subtitle="My ShowReel"
                     route="ShowReel"
                 />
                 <ProjectBox
-                    icon={copyNinjaImage}
-                    iconStyle={styles.ninjaIcon}
+                    icon={Animation25D}
+                    iconStyle={styles.d25Icon}
                     title="2.5D Animation"
                     subtitle="3D + 2D Animation"
                     route="Animation25D"
                 />
                 <ProjectBox
-                    icon={copyNinjaImage}
+                    icon={WebsiteAnim }
                     iconStyle={styles.ninjaIcon}
                     title="Website Animation"
                     subtitle="Lottie/Rive"
                     route="WebsiteAnimation"
                 />
                 <ProjectBox
-                    icon={copyNinjaImage}
-                    iconStyle={styles.ninjaIcon}
+                    icon={Reels}
+                    iconStyle={styles.reelIcon}
                     title="Reels"
                     subtitle="Reels/Tiktok/Shorts"
                     route="Reels"
                 />
                 <ProjectBox
-                    icon={software}
+                    icon={Explainer}
                     iconStyle={styles.computerIcon}
                     title="Explainers"
                     subtitle="Website"
@@ -102,14 +108,14 @@ const Projects: React.FC<ProjectsProps> = () => {
                 />
                 <ProjectBox
                     icon={CharacterAnimation}
-                    iconStyle={styles.artIcon}
+                    iconStyle={styles.cIcon}
                     title="Character Animation"
                     subtitle="Landing Page"
                     route="CharacterAnimation"
                 />
                 <ProjectBox
-                    icon={copyNinjaImage}
-                    iconStyle={styles.ninjaIcon}
+                    icon={LogoAnimation}
+                    iconStyle={styles.artIcon}
                     title="Logo Animation"
                     subtitle="Bringing Your Brand to Life"
                     route="LogoAnimation"
@@ -138,6 +144,12 @@ const styles: StyleSheetCSS = {
     projectText: {
         justifyContent: 'center',
         flexDirection: 'column',
+        marginLeft: 40,
+    },
+    projectt:{
+    justifyContent: 'center',
+    flexDirection: 'column',
+    marginLeft: 40,
     },
     projectLinkImage: {
         width: 48,
@@ -149,16 +161,32 @@ const styles: StyleSheetCSS = {
         alignItems: 'center',
     },
     computerIcon: {
-        width: 56,
-        height: 56,
+        width: 75,
+        height: 75,
     },
     arrowIcon: {
         width: 48,
         height: 48,
     },
     artIcon: {
+        width: 75,
+        height: 75,
+    },
+    cIcon:{
         width: 100,
         height: 100,
+    },
+    reelIcon:{
+        width: 75,
+        height: 75,
+    },
+    d25Icon:{
+        width: 75,
+        height: 75,
+    },
+    ShowIcon:{
+        width: 75,
+        height: 75,
     },
     ninjaIcon:{
         width: 75,

@@ -73,9 +73,9 @@ const Contact: React.FC<ContactProps> = (props) => {
             // the response will be either {success: true} or {success: false, error: message}
             const data = (await res.json()) as
                 | {
-                      success: false;
-                      error: string;
-                  }
+                success: false;
+                error: string;
+            }
                 | { success: true };
             if (data.success) {
                 setFormMessage(`Message successfully sent. Thank you ${name}!`);

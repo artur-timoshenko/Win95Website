@@ -137,8 +137,8 @@ const styles: StyleSheetCSS = {
         height: 48,
     },
     artIcon: {
-        width: 21 * 2,
-        height: 37 * 2,
+        width: 75,
+        height: 75,
     },
 };
 

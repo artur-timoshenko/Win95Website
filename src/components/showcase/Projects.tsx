@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import software from '../../assets/pictures/projects/software.gif';
-import art from '../../assets/pictures/projects/art.gif';
+import art from '../../assets/pictures/projects/artt.gif';
 
 export interface ProjectsProps {}
 
@@ -138,8 +138,8 @@ const styles: StyleSheetCSS = {
         height: 48,
     },
     artIcon: {
-        width: 21 * 2,
-        height: 37 * 2,
+        width: 75,
+        height: 75,
     },
 };
 

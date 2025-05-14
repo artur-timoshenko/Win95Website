@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import neverGiveUp from '../../assets/pictures/neverGiveUp.jpg';
-import eePic from '../../assets/pictures/ee.jpg';
+
 export interface ShutdownSequenceProps {
     numShutdowns: number;
     setShutdown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -260,7 +259,6 @@ const ShutdownSequence: React.FC<ShutdownSequenceProps> = ({
 
     return ee ? (
         <div style={styles.imageContainer}>
-            <img src={eePic} style={styles.img} alt="" />
         </div>
     ) : loading ? (
         <div style={styles.shutdown}>
@@ -268,7 +266,6 @@ const ShutdownSequence: React.FC<ShutdownSequenceProps> = ({
         </div>
     ) : numShutdowns === 10 ? (
         <div style={styles.imageContainer}>
-            <img src={neverGiveUp} style={styles.img} alt="" />
         </div>
     ) : (
         <div style={styles.shutdown}>
