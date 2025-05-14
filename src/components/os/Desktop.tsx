@@ -89,6 +89,116 @@ const Desktop: React.FC<DesktopProps> = () => {
         originY: 0,
     });
 
+    const gridStep = 120; // Размер шага для сетки
+    const desktopPadding = 0; // Отступ для иконок от верхнего края
+    const rightLimit = 100; // Ограничение справа
+    const bottomLimit = 100; // Ограничение снизу
+    const topLimit = 20; // Ограничение сверху
+
+
+
+    // Функция для начала перетаскивания ярлыка
+    const handleDragStart = (e: React.DragEvent, shortcutName: string) => {
+        e.dataTransfer.setData("shortcutName", shortcutName);
+    };
+
+
+
+
+    // Функция для проверки пересечения с другими иконками
+    const checkIntersection = (a: any, b: any) => {
+        return !(a.x > b.x + b.width ||
+            a.x + a.width < b.x ||
+            a.y > b.y + b.height ||
+            a.y + a.height < b.y);
+    };
+
+    // Функция для завершения перетаскивания и обновления позиции ярлыка
+    const handleDrop = (e: React.DragEvent) => {
+        const shortcutName = e.dataTransfer.getData("shortcutName");
+
+        // Получаем текущие координаты мыши
+        const mouseX = e.clientX - desktopPadding;
+        const mouseY = e.clientY - desktopPadding;
+
+        // Округляем координаты до ближайшей точки сетки
+        const snappedX = Math.floor(mouseX / gridStep) * gridStep;
+        const snappedY = Math.floor(mouseY / gridStep) * gridStep;
+
+        // Ограничиваем перемещение в пределах рабочего стола
+        const clampedX = Math.max(0, Math.min(snappedX, Math.floor(window.innerWidth / gridStep) * gridStep - 64)); // Ограничение справа
+        const clampedY = Math.max(topLimit, Math.min(snappedY, Math.floor(window.innerHeight / gridStep) * gridStep - 80)); // Ограничение снизу и сверху
+
+        // Проверка, не пересекается ли иконка с другой иконкой
+        const isCollision = shortcuts.some((shortcut) =>
+            shortcut.shortcutName !== shortcutName &&
+            checkIntersection({ x: clampedX, y: clampedY, width: 64, height: 80 }, shortcut)
+        );
+
+        // Если пересечение найдено, не разрешаем обновить позицию
+        if (isCollision) {
+            return;
+        }
+
+        // Перемещаем иконку в новое место
+        setShortcuts((prevShortcuts) =>
+            prevShortcuts.map((shortcut) =>
+                shortcut.shortcutName === shortcutName
+                    ? { ...shortcut, x: clampedX, y: clampedY }
+                    : shortcut
+            )
+        );
+    };
+
+
+    // Функция для предотвращения стандартного поведения перетаскивания
+    const handleDragOver = (e: React.DragEvent) => {
+        e.preventDefault();
+    };
+
+
+    // Функция для отображения сетки
+    const renderGrid = () => {
+        const gridLines = [];
+        // Горизонтальные линии
+        for (let x = 0; x < window.innerWidth; x += gridStep) {
+            gridLines.push(
+                <div
+                    key={`grid-x-${x}`}
+                    style={{
+                        position: 'fixed', // Используем fixed, чтобы сетка была закреплена на экране
+                        left: x,
+                        top: 0,
+                        width: '1px',
+                        height: '100%', // Высота на весь экран
+                        backgroundColor: '#888', // Цвет линии сетки
+                        opacity: 0.5,  // Легкая прозрачность
+                        zIndex: 9999,  // Сетка наверху
+                    }}
+                />
+            );
+        }
+        // Вертикальные линии
+        for (let y = 0; y < window.innerHeight; y += gridStep) {
+            gridLines.push(
+                <div
+                    key={`grid-y-${y}`}
+                    style={{
+                        position: 'fixed', // Используем fixed
+                        left: 0,
+                        top: y,
+                        width: '100%', // Ширина на весь экран
+                        height: '1px',
+                        backgroundColor: '#888', // Цвет линии сетки
+                        opacity: 0.5,  // Легкая прозрачность
+                        zIndex: 9999,  // Сетка наверху
+                    }}
+                />
+            );
+        }
+        return gridLines;
+    };
+
 
 
     useEffect(() => {
@@ -210,22 +320,15 @@ const Desktop: React.FC<DesktopProps> = () => {
                             />
                         );
                     },
-                    x: 6,
-                    y: 16 + index * 104,
+                    x: desktopPadding, // Начальная позиция по оси X
+                    y: desktopPadding + (index === 0 ? topLimit : index * gridStep), // Для первой иконки добавляем отступ сверху
                     width: 64,
                     height: 80,
                     selected: false,
                 });
             }
         });
-        newShortcuts.forEach((shortcut) => {
-            if (shortcut.shortcutName === 'Showcase') {
-                shortcut.onOpen();
-            }
-        });
-
         setShortcuts(newShortcuts);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
@@ -390,7 +493,13 @@ const Desktop: React.FC<DesktopProps> = () => {
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
             onContextMenu={handleContextMenu}
+            onDragOver={handleDragOver} // Обработчик перетаскивания для рабочего стола
+            onDrop={handleDrop}         // Обработчик завершения перетаскивания
         >
+            {/* Отображаем сетку
+            // <div style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
+                {renderGrid()}
+            </div> */}
             {Object.keys(windows).map((key) => {
                 const element = windows[key].component;
                 return (
@@ -416,8 +525,10 @@ const Desktop: React.FC<DesktopProps> = () => {
                         style={{
                             ...styles.shortcutContainer,
                             top: shortcut.y,
-                            left: shortcut.x,
+                            left: shortcut.x
                         }}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, shortcut.shortcutName)} // Добавляем обработчик начала перетаскивания
                     >
                         <DesktopShortcut
                             icon={shortcut.icon}
@@ -438,7 +549,7 @@ const Desktop: React.FC<DesktopProps> = () => {
                         height: selection.height,
                         backgroundColor: 'rgba(0, 0, 255, 0.3)',
                         border: '2px solid blue',
-                        pointerEvents: 'none',
+                        pointerEvents: 'none'
                     }}
                 />
             )}
