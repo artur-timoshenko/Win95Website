@@ -8,6 +8,7 @@ declare interface WindowAppProps {
     onMinimize: () => void;
 }
 
+
 declare type DesktopWindows = {
     [key in string]: {
         zIndex: number;

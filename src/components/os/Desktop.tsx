@@ -353,15 +353,30 @@ const Desktop: React.FC<DesktopProps> = () => {
         }));
     };
 
+
     const handleContextMenu = (e: any) => {
         e.preventDefault();
 
-        if (e?.target?.className === 'desktop') setContextMenu({
-            visible: true,
-            x: e.clientX,
-            y: e.clientY,
-            transitioning: false,
-        });
+
+        setHoveredItem(null);  // Сбрасываем выделенный элемент контекстного меню
+
+
+        setShortcuts((prevShortcuts) =>
+            prevShortcuts.map((shortcut) => ({
+                ...shortcut,
+                selected: false,
+            }))
+        );
+
+        // Показать контекстное меню
+        if (e?.target?.className === 'desktop') {
+            setContextMenu({
+                visible: true,
+                x: e.clientX,
+                y: e.clientY,
+                transitioning: false,
+            });
+        }
     };
 
 

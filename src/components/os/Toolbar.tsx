@@ -30,7 +30,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
 
     const [startWindowOpen, setStartWindowOpen] = useState(false);
     const lastClickInside = useRef(false);
-    const [isMuted, setIsMuted] = useState(false); // Статус звуку
+    const [isMuted, setIsMuted] = useState(false);
 
     const [lastActive, setLastActive] = useState('');
 
@@ -59,22 +59,21 @@ const Toolbar: React.FC<ToolbarProps> = ({
         setIsMuted((prevMuted) => {
             const newMuted = !prevMuted;
 
-            // Вимикаємо або включаємо звук на всіх елементах audio та video
+
             const mediaElements = document.querySelectorAll('audio, video');
             mediaElements.forEach((media) => {
                 (media as HTMLMediaElement).muted = newMuted;
             });
 
-            // Якщо JS-DOS використовує Web Audio API, ми можемо знайти та змінити відповідний контекст
             const audioContext = (window as any).audioContext;
             if (audioContext) {
-                audioContext.suspend(); // Зупиняємо звукові ефекти JS-DOS
+                audioContext.suspend();
             }
 
-            // Можна також спробувати вимкнути звук в інших можливих джерелах
+
             const jsDosSound = (window as any).jsdos;
             if (jsDosSound && jsDosSound.audio) {
-                jsDosSound.audio.muted = newMuted; // Для ігор JS-DOS
+                jsDosSound.audio.muted = newMuted;
             }
 
             return newMuted;
@@ -245,10 +244,9 @@ const Toolbar: React.FC<ToolbarProps> = ({
                     </div>
                 </div>
                 <div style={styles.time}>
-                    {/* Обгортаємо іконку в div, щоб додати onClick */}
                     <div
                         style={styles.volumeIcon}
-                        onClick={toggleMute} // Додаємо обробник на div
+                        onClick={toggleMute}
                     >
                         <Icon
                             icon={isMuted ? "volumeOff" : "volumeOn"}
