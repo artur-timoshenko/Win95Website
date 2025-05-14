@@ -10,7 +10,6 @@ import Pacman from '../applications/Pacman';
 import { useContext } from 'react';
 import { ThemeContext } from '../../hooks/ThemeProvider';
 import ThisComputer from '../applications/ThisComputer';
-import { Link } from 'react-router-dom';
 
 export interface DesktopProps {
     toggleTheme: () => void;
@@ -80,8 +79,6 @@ const Desktop: React.FC<DesktopProps> = () => {
         originX: 0,
         originY: 0,
     });
-
-    const [dragging, setDragging] = useState(false);
 
     useEffect(() => {
         const handleClickOutside = () => {

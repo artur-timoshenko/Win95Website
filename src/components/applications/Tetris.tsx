@@ -24,7 +24,7 @@ const TetrisApp: React.FC<TetrisAppProps> = (props) => {
             onWidthChange={setWidth}
             onHeightChange={setHeight}
         >
-            <DosPlayer width={width} height={height} bundleUrl="tetris.jsdos" />
+            <DosPlayer width={width} height={height} bundleUrl="/tetris.jsdos" />
         </Window>
     );
 };
