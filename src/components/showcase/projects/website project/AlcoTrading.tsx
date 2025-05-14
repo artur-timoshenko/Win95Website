@@ -1,7 +1,5 @@
 import React from 'react';
 
-import kakashiPose from '../../../../assets/icons/copy-ninja.png';
-
 export interface AlcoTradingProps {}  // Измените имя интерфейса
 
 const AlcoTrading: React.FC<AlcoTradingProps> = (props) => {  // Используйте новый интерфейс

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from '../general';
-import { useNavigate } from 'react-router-dom';
 
 import portfolioIcon from '../../assets/icons/portfolio.png';
 import experienceIcon from '../../assets/icons/experience.png';
@@ -10,17 +9,12 @@ import contactIcon from '../../assets/icons/contact.png';
 export interface HomeProps {}
 
 const Home: React.FC<HomeProps> = () => {
-    const navigate = useNavigate();
-
-    const goToContact = () => {
-        navigate('/contact');
-    };
 
     return (
         <div style={styles.page}>
             <div style={styles.header}>
                 <h1 style={styles.name}>Neura</h1>
-                <h2>Motion Design and Web Developing</h2>
+                <h2>Motion Design and Web Development</h2>
             </div>
             <div style={styles.buttons}>
                 <Link
@@ -28,8 +22,8 @@ const Home: React.FC<HomeProps> = () => {
                     containerStyle={styles.link}
                     text={
                         <div style={styles.iconBlock}>
-                            <img src={portfolioIcon} alt="Portfolio" style={styles.icon} />
-                            <div style={styles.label}>Portfolio</div>
+                            <img src={portfolioIcon} alt="Projects" style={styles.icon} />
+                            <div style={styles.label}>Projects</div>
                         </div>
                     }
                 />

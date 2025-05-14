@@ -7,12 +7,12 @@ export interface ThisComputerProps extends WindowAppProps {}
 const ThisComputerApp: React.FC<ThisComputerProps> = (props) => {
     return (
         <Window
-            top={20}
-            left={20}
+            top={150}
+            left={700}
             width={600}
-            height={400}
-            windowBarIcon="computerSmall"
-            windowTitle="This Computer"
+            height={500}
+            windowBarIcon="showcaseIcon"
+            windowTitle="Internet Explorer"
             closeWindow={props.onClose}
             onInteract={props.onInteract}
             minimizeWindow={props.onMinimize}

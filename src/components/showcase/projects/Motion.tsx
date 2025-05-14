@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import software from '../../../assets/pictures/projects/software.gif';
-import art from '../../../assets/pictures/projects/art.gif';
+import CharacterAnimation from '../../../assets/pictures/CharacterAnimation.gif';
 import copyNinjaImage from '../../../assets/icons/copy-ninja.png';
 
 export interface ProjectsProps {}
@@ -55,7 +55,7 @@ const ProjectBox: React.FC<ProjectBoxProps> = ({
 const Projects: React.FC<ProjectsProps> = () => {
     return (
         <div className="site-page-content">
-            <h1>Website</h1>
+            <h1>Motion</h1>
             <h3>Projects</h3>
             <br />
             <p>
@@ -66,25 +66,53 @@ const Projects: React.FC<ProjectsProps> = () => {
             <br />
             <div style={styles.projectLinksContainer}>
                 <ProjectBox
-                    icon={software}
-                    iconStyle={styles.computerIcon}
-                    title="AlcoTrading"
-                    subtitle="Website"
-                    route="AlcoTrading"
-                />
-                <ProjectBox
-                    icon={art}
-                    iconStyle={styles.artIcon}
-                    title="Lviv Knyazhy"
-                    subtitle="Landing Page"
-                    route="LvivKnyazhy"
+                    icon={copyNinjaImage}
+                    iconStyle={styles.ninjaIcon}
+                    title="ShowReel"
+                    subtitle="My ShowReel"
+                    route="ShowReel"
                 />
                 <ProjectBox
                     icon={copyNinjaImage}
                     iconStyle={styles.ninjaIcon}
-                    title="The Copy Ninja"
+                    title="2.5D Animation"
+                    subtitle="3D + 2D Animation"
+                    route="Animation25D"
+                />
+                <ProjectBox
+                    icon={copyNinjaImage}
+                    iconStyle={styles.ninjaIcon}
+                    title="Website Animation"
+                    subtitle="Lottie/Rive"
+                    route="WebsiteAnimation"
+                />
+                <ProjectBox
+                    icon={copyNinjaImage}
+                    iconStyle={styles.ninjaIcon}
+                    title="Reels"
+                    subtitle="Reels/Tiktok/Shorts"
+                    route="Reels"
+                />
+                <ProjectBox
+                    icon={software}
+                    iconStyle={styles.computerIcon}
+                    title="Explainers"
+                    subtitle="Website"
+                    route="Explainers"
+                />
+                <ProjectBox
+                    icon={CharacterAnimation}
+                    iconStyle={styles.artIcon}
+                    title="Character Animation"
                     subtitle="Landing Page"
-                    route="the-copy-ninja"
+                    route="CharacterAnimation"
+                />
+                <ProjectBox
+                    icon={copyNinjaImage}
+                    iconStyle={styles.ninjaIcon}
+                    title="Logo Animation"
+                    subtitle="Bringing Your Brand to Life"
+                    route="LogoAnimation"
                 />
             </div>
         </div>
@@ -129,8 +157,8 @@ const styles: StyleSheetCSS = {
         height: 48,
     },
     artIcon: {
-        width: 21 * 2,
-        height: 37 * 2,
+        width: 100,
+        height: 100,
     },
     ninjaIcon:{
         width: 75,

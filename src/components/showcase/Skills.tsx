@@ -79,7 +79,7 @@ const Skills: React.FC<SkillsProps> = (props) => {
                 <SkillsBox
                     icon={software}
                     iconStyle={styles.computerIcon}
-                    title="Websites"
+                    title="Web Development"
                     subtitle="SKILLS"
                     route="web"
                 />
