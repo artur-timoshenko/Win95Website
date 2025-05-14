@@ -1,5 +1,6 @@
 import React from 'react';
 
+import computerBig from './computerBig.png';
 import windowResize from './windowResize.png';
 import maximize from './maximize.png';
 import minimize from './minimize.png';
@@ -32,6 +33,7 @@ import ReactIcon from './ReactIcon.png'
 import DJicon from './DJicon.png'
 import FAicon from './FAicon.png'
 import TGicon from './TGicon.png'
+import SettingsIcon from './SettingsIcon.png'
 
 const icons = {
     windowResize: windowResize,
@@ -45,6 +47,7 @@ const icons = {
     volumeOff: volumeOff,
     credits: credits,
     close: close,
+    computerBig: computerBig,
     windowGameIcon: windowGameIcon,
     windowExplorerIcon: windowExplorerIcon,
     windowsStartIcon: windowsStartIcon,
@@ -66,6 +69,7 @@ const icons = {
     DJicon:DJicon,
     FAicon:FAicon,
     TGicon:TGicon,
+    SettingsIcon:SettingsIcon,
 
 };
 

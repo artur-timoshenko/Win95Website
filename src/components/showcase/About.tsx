@@ -11,13 +11,11 @@ const About: React.FC<AboutProps> = (props) => {
         <div className="site-page-content">
             {/* <img src={me} style={styles.topImage} alt="" /> */}
             <h1 style={{ marginLeft: -16 }}>Welcome</h1>
-            <h3>I'm Tymoshenko Artur</h3>
+            <h3>We Are Neura</h3>
             <br />
             <div className="text-block">
                 <p>
-                    I'm a software engineer currently working at Vercel! In May
-                    of 2022 I graduated from Rensselaer Polytechnic Institute
-                    with my BS in Computer Science.
+                    We are Neura
                 </p>
                 <br />
                 <p>
@@ -71,7 +69,7 @@ const About: React.FC<AboutProps> = (props) => {
                     . We worked on many projects together, including chat bots,
                     multiple game projects, apps, and more. One of these
                     projects is viewable on my{' '}
-                    <Link to="/projects/software">Software Projects</Link> page.
+                    <Link to="/projects/websites">Software Projects</Link> page.
                 </p>
                 <br />
                 <p>
