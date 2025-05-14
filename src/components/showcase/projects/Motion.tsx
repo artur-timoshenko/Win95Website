@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import software from '../../../assets/pictures/projects/software.gif';
 import CharacterAnimation from '../../../assets/pictures/CharacterAnimation.gif';
-import Logoicon from '../../../assets/pictures/Logo.gif';
-import Webicon from '../../../assets/pictures/Website.gif';
-import Reelsicon from '../../../assets/pictures/reels.gif';
 import copyNinjaImage from '../../../assets/icons/copy-ninja.png';
-import { ExplainersProps } from './motion design project/Explainers';
-import Showreelicon from '../../../assets/pictures/showreel.gif';
 
 export interface ProjectsProps {}
 
@@ -60,7 +55,7 @@ const ProjectBox: React.FC<ProjectBoxProps> = ({
 const Projects: React.FC<ProjectsProps> = () => {
     return (
         <div className="site-page-content">
-            <h1>Animation</h1>
+            <h1>Motion</h1>
             <h3>Projects</h3>
             <br />
             <p>
@@ -71,8 +66,8 @@ const Projects: React.FC<ProjectsProps> = () => {
             <br />
             <div style={styles.projectLinksContainer}>
                 <ProjectBox
-                    icon={Showreelicon}
-                    iconStyle={styles.artIcon}
+                    icon={copyNinjaImage}
+                    iconStyle={styles.ninjaIcon}
                     title="ShowReel"
                     subtitle="My ShowReel"
                     route="ShowReel"
@@ -85,15 +80,15 @@ const Projects: React.FC<ProjectsProps> = () => {
                     route="Animation25D"
                 />
                 <ProjectBox
-                    icon={Webicon}
-                    iconStyle={styles.artIcon}
+                    icon={copyNinjaImage}
+                    iconStyle={styles.ninjaIcon}
                     title="Website Animation"
                     subtitle="Lottie/Rive"
                     route="WebsiteAnimation"
                 />
                 <ProjectBox
-                    icon={Reelsicon}
-                    iconStyle={styles.reelsIcon}
+                    icon={copyNinjaImage}
+                    iconStyle={styles.ninjaIcon}
                     title="Reels"
                     subtitle="Reels/Tiktok/Shorts"
                     route="Reels"
@@ -113,8 +108,8 @@ const Projects: React.FC<ProjectsProps> = () => {
                     route="CharacterAnimation"
                 />
                 <ProjectBox
-                    icon={Logoicon}
-                    iconStyle={styles.artIcon}
+                    icon={copyNinjaImage}
+                    iconStyle={styles.ninjaIcon}
                     title="Logo Animation"
                     subtitle="Bringing Your Brand to Life"
                     route="LogoAnimation"
@@ -168,10 +163,6 @@ const styles: StyleSheetCSS = {
     ninjaIcon:{
         width: 75,
         height: 75,
-    },
-    reelsIcon:{
-        width: 75,
-        height: 50,
     }
 };
 

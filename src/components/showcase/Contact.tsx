@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import colors from '../../constants/colors';
 import TGicon from '../../assets/icons/TGicon.png';
 import ghIcon from '../../assets/pictures/contact-gh.png';
-import inIcon from '../../assets/pictures/contact-in.png';
 import ResumeDownload from './ResumeDownload';
 
 export interface ContactProps {}

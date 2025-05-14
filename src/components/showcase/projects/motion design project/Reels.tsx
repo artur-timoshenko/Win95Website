@@ -1,7 +1,5 @@
 import React from 'react';
 
-import kakashiPose from '../../../../assets/icons/copy-ninja.png';
-
 export interface ReelsProps {}  // Измените имя интерфейса
 
 const Reels: React.FC<ReelsProps> = (props) => {  // Используйте новый интерфейс

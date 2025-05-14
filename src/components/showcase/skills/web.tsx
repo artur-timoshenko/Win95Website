@@ -1,6 +1,5 @@
 import React, { CSSProperties, useState, useEffect } from 'react';
 import HTMLicon from '../../../assets/icons/HTMLicon.png'
-import { Link } from 'react-router-dom';
 import CSSicon from '../../../assets/icons/CSSicon.png'
 import JSicon from '../../../assets/icons/JSicon.png'
 import ReactIcon from '../../../assets/icons/ReactIcon.png'
@@ -125,7 +124,6 @@ const styles = {
         gap: '20px', // Добавляем зазор между элементами для удобства
     } as CSSProperties,
     skillBlock: {
-        width: '48%',
         marginBottom: '15px',
         padding: '10px',
         backgroundColor: 'transparent',
@@ -147,6 +145,8 @@ const styles = {
         color: '#333',
     } as CSSProperties,
     icon: {
+        minWidth: '60px',
+        minHeight: '60px',
         width: '60px',
         height: '60px',
         marginRight: '10px',

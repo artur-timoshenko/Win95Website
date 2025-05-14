@@ -10,8 +10,6 @@ import Pacman from '../applications/Pacman';
 import { useContext } from 'react';
 import { ThemeContext } from '../../hooks/ThemeProvider';
 import ThisComputer from '../applications/ThisComputer';
-import PropertiesExplorer from '../applications/PropertiesExplorer';
-
 
 export interface DesktopProps {
     toggleTheme: () => void;
@@ -51,12 +49,6 @@ const APPLICATIONS: {
         name: 'Pacman',
         shortcutIcon: 'pacmanIcon',
         component: Pacman,
-    },
-    properties:{
-        key: 'properties',
-        name: 'properties',
-        shortcutIcon: 'SettingsIcon',
-        component: PropertiesExplorer,
     }
 };
 
@@ -78,7 +70,6 @@ const Desktop: React.FC<DesktopProps> = () => {
 
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
-
     const [selection, setSelection] = useState({
         isSelecting: false,
         startX: 0,
@@ -88,8 +79,6 @@ const Desktop: React.FC<DesktopProps> = () => {
         originX: 0,
         originY: 0,
     });
-
-
 
     useEffect(() => {
         const handleClickOutside = () => {
@@ -190,33 +179,30 @@ const Desktop: React.FC<DesktopProps> = () => {
         }));
     }, [getHighestZIndex]);
 
-
     useEffect(() => {
         const newShortcuts: DesktopShortcutProps[] = [];
         Object.keys(APPLICATIONS).forEach((key, index) => {
-            if (key !== 'properties') {  // Исключаем ярлык "Properties"
-                const app = APPLICATIONS[key];
-                newShortcuts.push({
-                    shortcutName: app.name,
-                    icon: app.shortcutIcon,
-                    onOpen: () => {
-                        addWindow(
-                            app.key,
-                            <app.component
-                                onInteract={() => onWindowInteract(app.key)}
-                                onMinimize={() => minimizeWindow(app.key)}
-                                onClose={() => removeWindow(app.key)}
-                                key={app.key}
-                            />
-                        );
-                    },
-                    x: 6,
-                    y: 16 + index * 104,
-                    width: 64,
-                    height: 80,
-                    selected: false,
-                });
-            }
+            const app = APPLICATIONS[key];
+            newShortcuts.push({
+                shortcutName: app.name,
+                icon: app.shortcutIcon,
+                onOpen: () => {
+                    addWindow(
+                        app.key,
+                        <app.component
+                            onInteract={() => onWindowInteract(app.key)}
+                            onMinimize={() => minimizeWindow(app.key)}
+                            onClose={() => removeWindow(app.key)}
+                            key={app.key}
+                        />
+                    );
+                },
+                x: 6,
+                y: 16 + index * 104,
+                width: 64,
+                height: 80,
+                selected: false,
+            });
         });
         newShortcuts.forEach((shortcut) => {
             if (shortcut.shortcutName === 'Showcase') {
@@ -227,7 +213,6 @@ const Desktop: React.FC<DesktopProps> = () => {
         setShortcuts(newShortcuts);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
 
     const handleMouseDown = (e: any) => {
         const originX = e.clientX;
@@ -364,8 +349,6 @@ const Desktop: React.FC<DesktopProps> = () => {
         });
     };
 
-
-
     return !shutdown ? (
         <div
             className='desktop'
@@ -448,20 +431,14 @@ const Desktop: React.FC<DesktopProps> = () => {
                     onClick={() => setContextMenu({ ...contextMenu, visible: false })}
                 >
                     <div
-                        className="contextMenuItem"
+                        className='contextMenuItem'
                         style={{
                             ...contextItemStyle,
                             ...(hoveredItem === 'websites' ? contextItemHoverStyle : {})
                         }}
                         onMouseEnter={() => setHoveredItem('websites')}
                         onMouseLeave={() => setHoveredItem(null)}
-                        onClick={() => {
-                            removeWindow('showcase');
-                            setTimeout(() => {
-                                window.history.pushState(null, '', '/projects/websites');
-                                shortcuts[0].onOpen();
-                            }, 100);
-                        }}
+                        onClick={() => {removeWindow('showcase'); setTimeout(() => {window.history.pushState(null, "", '/projects/websites'); shortcuts[0].onOpen();}, 100)}}
                     >
                         Websites
                     </div>
@@ -472,13 +449,7 @@ const Desktop: React.FC<DesktopProps> = () => {
                         }}
                         onMouseEnter={() => setHoveredItem('lineUpIcons')}
                         onMouseLeave={() => setHoveredItem(null)}
-                        onClick={() => {
-                            removeWindow('showcase');
-                            setTimeout(() => {
-                                window.history.pushState(null, '', '/projects/motion');
-                                shortcuts[0].onOpen();
-                            }, 100);
-                        }}
+                        onClick={() => {removeWindow('showcase'); setTimeout(() => {window.history.pushState(null, "", '/projects/motion'); shortcuts[0].onOpen();}, 100)}}
                     >
                         Motion
                     </div>
@@ -513,13 +484,7 @@ const Desktop: React.FC<DesktopProps> = () => {
                         }}
                         onMouseEnter={() => setHoveredItem('new')}
                         onMouseLeave={() => setHoveredItem(null)}
-                        onClick={() => {
-                            removeWindow('showcase');
-                            setTimeout(() => {
-                                window.history.pushState(null, '', '/contact');
-                                shortcuts[0].onOpen();
-                            }, 100);
-                        }}
+                        onClick={() => {removeWindow('showcase'); setTimeout(() => {window.history.pushState(null, "", '/contact'); shortcuts[0].onOpen();}, 100)}}
                     >
                         New Project
                     </div>
@@ -530,28 +495,9 @@ const Desktop: React.FC<DesktopProps> = () => {
                         }}
                         onMouseEnter={() => setHoveredItem('properties')}
                         onMouseLeave={() => setHoveredItem(null)}
-                        onClick={() => {
-                            // Открыть PropertiesExplorer в месте контекстного меню
-                            setTimeout(() => {
-                                addWindow(
-                                    'properties',
-                                    <PropertiesExplorer
-                                        onInteract={() => onWindowInteract('properties')}
-                                        onMinimize={() => minimizeWindow('properties')}
-                                        onClose={() => removeWindow('properties')}
-                                        style={{
-                                            position: 'absolute',
-                                            top: contextMenu.y, // Координата Y контекстного меню
-                                            left: contextMenu.x // Координата X контекстного меню
-                                        }}
-                                    />
-                                );
-                            }, 100);
-                        }}
                     >
                         Properties
                     </div>
-
                 </div>
             )}
             <Toolbar
@@ -590,7 +536,7 @@ const contextItemHoverStyle: React.CSSProperties = {
 
 const specialItemStyle: React.CSSProperties = {
     color: '#808080',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
 };
 
 const menuDividerStyle: React.CSSProperties = {

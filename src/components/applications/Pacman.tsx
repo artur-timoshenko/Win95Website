@@ -24,7 +24,7 @@ const PacmanApp: React.FC<PacmanAppProps> = (props) => {
             onWidthChange={setWidth}
             onHeightChange={setHeight}
         >
-            <DosPlayer width={width} height={height} bundleUrl="pacman.jsdos" />
+            <DosPlayer width={width} height={height} bundleUrl="/pacman.jsdos" />
         </Window>
     );
 };

@@ -141,19 +141,16 @@ const styles: StyleSheetCSS = {
         marginBottom: 8
     },
     link: {
-        marginBottom: 32,
-        color: '#0000ee',
+        marginBottom: 32
     },
     expandedLink: {
-        marginBottom: 16,
-        color: '#0000ee',
+        marginBottom: 16
     },
     insetLinks: {
         whiteSpace: 'nowrap',
         flexDirection: 'column',
         marginLeft: 32,
-        marginBottom: 16,
-        color: '#0000ee',
+        marginBottom: 16
     },
     insetLink: {
         marginBottom: 8

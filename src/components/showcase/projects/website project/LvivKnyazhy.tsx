@@ -1,7 +1,5 @@
 import React from 'react';
 
-import kakashiPose from '../../../../assets/icons/copy-ninja.png';
-
 export interface LvivKnyazhyProps {}
 
 const LvivKnyazhy: React.FC<LvivKnyazhyProps> = (props) => {

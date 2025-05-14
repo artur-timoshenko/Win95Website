@@ -1,6 +1,4 @@
 import React, { CSSProperties, useState, useEffect } from 'react';
-import HTMLicon from '../../../assets/icons/HTMLicon.png'
-import { Link } from 'react-router-dom';
 import AEicon from '../../../assets/icons/AEicon.png'
 import AIicon from '../../../assets/icons/AIicon.png'
 import PSicon from '../../../assets/icons/PSicon.png'
@@ -22,7 +20,7 @@ const Motion: React.FC<MotionProps> = () => {
 
     return (
         <div className="skills-page" style={styles.pageContainer}>
-            <h1 style={styles.heading}>Motion Skills</h1>
+            <h1 style={styles.heading}>Motion Design Skills</h1>
             <div className="skills-container" style={styles.skillsContainer}>
                 {skillLevels.map((skill, index) => (
                     <div key={index} style={styles.skillBlock}>
@@ -124,7 +122,6 @@ const styles = {
         gap: '20px', // Добавляем зазор между элементами для удобства
     } as CSSProperties,
     skillBlock: {
-        width: '48%',
         marginBottom: '15px',
         padding: '10px',
         backgroundColor: 'transparent',
@@ -146,6 +143,8 @@ const styles = {
         color: '#333',
     } as CSSProperties,
     icon: {
+        minWidth: '60px',
+        minHeight: '60px',
         width: '60px',
         height: '60px',
         marginRight: '10px',
