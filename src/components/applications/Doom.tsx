@@ -24,7 +24,7 @@ const DoomApp: React.FC<DoomAppProps> = (props) => {
             onWidthChange={setWidth}
             onHeightChange={setHeight}
         >
-            <DosPlayer width={width} height={height} bundleUrl="doom.jsdos" />
+            <DosPlayer width={width} height={height} bundleUrl="/doom.jsdos" />
         </Window>
     );
 };
