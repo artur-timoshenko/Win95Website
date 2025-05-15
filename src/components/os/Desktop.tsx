@@ -126,8 +126,8 @@ const Desktop: React.FC<DesktopProps> = () => {
         const snappedY = Math.floor(mouseY / gridStep) * gridStep;
 
         // Ограничиваем перемещение в пределах рабочего стола
-        const clampedX = Math.max(0, Math.min(snappedX, Math.floor(window.innerWidth / gridStep) * gridStep - 64)); // Ограничение справа
-        const clampedY = Math.max(topLimit, Math.min(snappedY, Math.floor(window.innerHeight / gridStep) * gridStep - 80)); // Ограничение снизу и сверху
+        const clampedX = Math.max(0, Math.min(snappedX, Math.floor(window.innerWidth / gridStep) * gridStep - 120)); // Ограничение справа
+        const clampedY = Math.max(topLimit, Math.min(snappedY, Math.floor(window.innerHeight / gridStep) * gridStep - 120)); // Ограничение снизу и сверху
 
         // Проверка, не пересекается ли иконка с другой иконкой
         const isCollision = shortcuts.some((shortcut) =>
@@ -404,10 +404,12 @@ const Desktop: React.FC<DesktopProps> = () => {
         }
     };
 
-    const isIntersecting = (a: any, b: any, marginLeft: any = 32) => {
+    const isIntersecting = (a: { x: number; y: number; width: number; height: number },
+                            b: { x: number; y: number; width: number; height: number },
+                            marginLeft: number = 0) => {
         return !(
             a.x > b.x + b.width + marginLeft ||
-            a.x + a.width + a < b.x ||
+            a.x + a.width < b.x ||
             a.y > b.y + b.height ||
             a.y + a.height < b.y
         );
@@ -526,6 +528,7 @@ const Desktop: React.FC<DesktopProps> = () => {
                             ...styles.shortcutContainer,
                             top: shortcut.y,
                             left: shortcut.x
+
                         }}
                         draggable
                         onDragStart={(e) => handleDragStart(e, shortcut.shortcutName)} // Добавляем обработчик начала перетаскивания
