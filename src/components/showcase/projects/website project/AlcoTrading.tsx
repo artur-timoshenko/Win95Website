@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface AlcoTradingProps {}  // Измените имя интерфейса
+export interface AlcoTradingProps {}
 
 const AlcoTrading: React.FC<AlcoTradingProps> = (props) => {  // Используйте новый интерфейс
     return (
@@ -14,3 +14,4 @@ const AlcoTrading: React.FC<AlcoTradingProps> = (props) => {  // Использ�
 };
 
 export default AlcoTrading;
+
